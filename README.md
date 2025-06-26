@@ -119,7 +119,7 @@ Response Sukses:
 
 ---
 
-## 🤝 Kontribusi Pull request & issue welcome via: ctflabs-id/Perpustakaan-Hantu-CTF
+## 🤝 Kontribusi Pull request & issue welcome via: ctflabs-id/EBook-Premium-CTF
 ## 🧠 Maintained by:
 ```
 GitHub: @ctflabs-id

